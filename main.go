@@ -2,15 +2,26 @@ package main
 
 import "log"
 
+var (
+	fooKey   = "foo"
+	fooValue = "bar"
+
+	mooKey   = "moo"
+	mooValue = int32(7)
+
+	gooKey   = "goo"
+	gooValue = map[string]interface{}{"boo": "baz"}
+)
+
 func main() {
 	to := 20000
 
 	for i := 0; i < to; i++ {
 
 		m := map[string]interface{}{
-			"foo": "bar",
-			"moo": int32(7),
-			"goo": map[string]interface{}{"boo": "baz"},
+			fooKey: fooValue,
+			mooKey: mooValue,
+			gooKey: gooValue,
 		}
 
 		if m["foo"] != "bar" || m["moo"] != int32(7) || m["goo"] == nil {
@@ -20,9 +31,9 @@ func main() {
 
 	for i := 0; i < to; i++ {
 		m := make(map[string]interface{})
-		m["foo"] = "bar"
-		m["moo"] = int32(7)
-		m["goo"] = map[string]interface{}{"boo": "baz"}
+		m[fooKey] = fooValue
+		m[mooKey] = mooValue
+		m[gooKey] = gooValue
 
 		if m["foo"] != "bar" || m["moo"] != int32(7) || m["goo"] == nil {
 			log.Fatalf("your test is broken: %v", m)
@@ -31,9 +42,9 @@ func main() {
 
 	for i := 0; i < to; i++ {
 		m := make(map[string]interface{})
-		SetString(m, "foo", "bar")
-		SetInt32(m, "moo", int32(7))
-		SetMap(m, "goo", map[string]interface{}{"boo": "baz"})
+		SetString(m, fooKey, fooValue)
+		SetInt32(m, mooKey, mooValue)
+		SetMap(m, gooKey, gooValue)
 
 		if m["foo"] != "bar" || m["moo"] != int32(7) || m["goo"] == nil {
 			log.Fatalf("your test is broken: %v", m)

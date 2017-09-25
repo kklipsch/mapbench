@@ -1,19 +1,21 @@
 # Output from benchmarks	
 
-Using a Macbook Pro (Retina, 13-inch, Late 2013), 2.4Ghz Intel Core i5, 8 GB 1600 MHz DDR3
+Using a Macbook Pro (Retina, 15-inch, Mid 2014), 2.5Ghz Intel Core i7, 16 GB 1600 MHz DDR3
 
 go1.9
 
 ```bash
 $ go test -cpuprofile=cpu.out -memprofile=mem.out -run=xxx -bench=. -benchmem .
-goos: darwin
-goarch: amd64
+goarch: amd6 goos: darwin4
 pkg: github.com/kklipsch/mapbench
-BenchmarkMapInit-4               2000000               625 ns/op             672 B/op          4 allocs/op
-BenchmarkMapSet-4                2000000               615 ns/op             672 B/op          4 allocs/op
-BenchmarkMapFunctions-4          2000000               689 ns/op             692 B/op          6 allocs/op
-BenchmarkMapSetAlloc-4           5000000               375 ns/op             336 B/op          2 allocs/op
-BenchmarkMapFunctionsAlloc-4     3000000               460 ns/op             356 B/op          4 allocs/op
+BenchmarkMapInit-8               3000000               494 ns/op
+BenchmarkMapSet-8                3000000               489 ns/op
+BenchmarkMapFunctions-8          3000000               552 ns/op
+BenchmarkMapInitVars-8           5000000               359 ns/op
+BenchmarkMapSetVars-8            5000000               352 ns/op
+BenchmarkMapFunctionsVars-8      5000000               359 ns/op
+BenchmarkMapSetAlloc-8           5000000               297 ns/op
+BenchmarkMapFunctionsAlloc-8     5000000               344 ns/op
 PASS
 ok      github.com/kklipsch/mapbench    10.105s
 ```

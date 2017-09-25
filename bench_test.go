@@ -42,6 +42,46 @@ func BenchmarkMapFunctions(b *testing.B) {
 	}
 }
 
+func BenchmarkMapInitVars(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := map[string]interface{}{
+			fooKey: fooValue,
+			mooKey: mooValue,
+			gooKey: gooValue,
+		}
+
+		if m["foo"] != "bar" || m["moo"] != int32(7) || m["goo"] == nil {
+			b.Errorf("your test is broken: %v", m)
+		}
+	}
+}
+
+func BenchmarkMapSetVars(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := make(map[string]interface{})
+		m[fooKey] = fooValue
+		m[mooKey] = mooValue
+		m[gooKey] = gooValue
+
+		if m["foo"] != "bar" || m["moo"] != int32(7) || m["goo"] == nil {
+			b.Errorf("your test is broken: %v", m)
+		}
+	}
+}
+
+func BenchmarkMapFunctionsVars(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := make(map[string]interface{})
+		SetString(m, fooKey, fooValue)
+		SetInt32(m, mooKey, mooValue)
+		SetMap(m, gooKey, gooValue)
+
+		if m["foo"] != "bar" || m["moo"] != int32(7) || m["goo"] == nil {
+			b.Errorf("your test is broken: %v", m)
+		}
+	}
+}
+
 func BenchmarkMapSetAlloc(b *testing.B) {
 	m := make(map[string]interface{})
 	b.ResetTimer()
